@@ -25,15 +25,32 @@
       </div>
 
       <button type="submit" id="submitBtn">Evaluate Matches</button>
+      <button id="analyze-btn" type="button">📊 Analyze Resume</button>
     </form>
-
     <div id="loading" class="hidden">
       <p>Scraping jobs and consulting Gemini... This might take a minute.</p>
     </div>
 
     <div id="results"></div>
-  </div>
 
+    <div id="dashboard-container" style="display: none; margin-top: 30px; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #fafafa;">
+      <h2 style="border-bottom: 2px solid #ddd; padding-bottom: 10px;">Resume DNA Dashboard</h2>
+      <p id="dash-summary" style="font-style: italic; color: #555; margin-bottom: 20px;"></p>
+
+      <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+          <div style="flex: 1; min-width: 250px;">
+              <h3>Core Stats</h3>
+              <p><strong>Experience:</strong> <span id="dash-exp"></span> Years</p>
+              <p><strong>Top Hard Skills:</strong> <span id="dash-hard"></span></p>
+              <p><strong>Top Soft Skills:</strong> <span id="dash-soft"></span></p>
+          </div>
+
+          <div style="flex: 1; min-width: 300px; max-width: 400px;">
+              <canvas id="skillsRadarChart"></canvas>
+          </div>
+      </div>
+    </div>
+  </div> <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
