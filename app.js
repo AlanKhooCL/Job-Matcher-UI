@@ -234,3 +234,33 @@ enhanceBtn.addEventListener('click', async () => {
         enhanceBtn.disabled = false;
     }
 });
+
+// --- COPY TO CLIPBOARD LOGIC ---
+const copyBtn = document.getElementById('copy-btn');
+
+copyBtn.addEventListener('click', async () => {
+    // Grab the text from the enhanced content div
+    const contentToCopy = document.getElementById('enhanced-content').innerText;
+    
+    try {
+        // Use the modern Clipboard API
+        await navigator.clipboard.writeText(contentToCopy);
+        
+        // Visual feedback: Change the button temporarily
+        const originalText = copyBtn.innerHTML;
+        copyBtn.innerHTML = "✅ Copied!";
+        copyBtn.style.borderColor = "var(--accent)";
+        copyBtn.style.color = "var(--accent)";
+        
+        // Change it back after 2 seconds
+        setTimeout(() => {
+            copyBtn.innerHTML = originalText;
+            copyBtn.style.borderColor = "var(--border-subtle)";
+            copyBtn.style.color = "var(--text-main)";
+        }, 2000);
+
+    } catch (err) {
+        console.error('Failed to copy text: ', err);
+        alert("Failed to copy. Please select the text and copy it manually.");
+    }
+});
