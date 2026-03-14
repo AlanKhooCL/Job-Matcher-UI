@@ -157,3 +157,48 @@ function drawChart(skillScores) {
         }
     });
 }
+
+// --- ENHANCER LOGIC ---
+const enhanceBtn = document.getElementById('enhance-btn');
+const enhancedContainer = document.getElementById('enhanced-container');
+const enhancedContent = document.getElementById('enhanced-content');
+
+enhanceBtn.addEventListener('click', async () => {
+    const resumeInput = document.getElementById('resume');
+    const resumeFile = resumeInput.files[0];
+    
+    if (!resumeFile) {
+        alert("Please upload a resume first!");
+        return;
+    }
+
+    // Show loading state
+    enhanceBtn.textContent = "✨ Rewriting Resume...";
+    enhanceBtn.disabled = true;
+
+    const formData = new FormData();
+    formData.append('resume', resumeFile);
+
+    try {
+        const response = await fetch('https://job-matcher-api-ud1m.onrender.com/api/enhance-resume', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) throw new Error("Server error enhancing resume");
+        
+        const data = await response.json();
+
+        // Inject the HTML straight from Gemini into the page
+        enhancedContent.innerHTML = data.html;
+        enhancedContainer.style.display = 'block';
+
+    } catch (error) {
+        console.error("Enhancer error:", error);
+        alert("Failed to enhance resume. Check the console.");
+    } finally {
+        // Reset button
+        enhanceBtn.textContent = "✨ Enhance Resume";
+        enhanceBtn.disabled = false;
+    }
+});
