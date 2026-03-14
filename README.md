@@ -1,50 +1,63 @@
-# Job Application Tracker
+# 🚀 Job Matcher AI
 
-A lightweight, client-side web application for tracking job applications. All data is stored locally in your browser using localStorage -- no server or database required.
+An AI-powered career portal designed to analyze, evaluate, and enhance resumes against real-world job descriptions. Built with a sleek, dark-mode Japandi aesthetic, this full-stack application utilizes Google's latest Gemini 3 model to give job seekers a data-driven edge.
 
-## Features
+## ✨ Features
 
-- **Add, edit, and delete** job applications with details like company, position, date, status, location, salary range, job URL, and notes
-- **Status tracking** with visual badges: Applied, Phone Screen, Interview, Offer, Rejected, Withdrawn
-- **Dashboard stats** showing counts per status at a glance
-- **Search** by company name, position, or location
-- **Filter** by application status (also via clickable stat cards)
-- **Sort** by date, company name, or status
-- **Export to CSV** for use in spreadsheets or external tools
-- **Responsive design** that works on desktop, tablet, and mobile
-- **Keyboard accessible** with Escape to close modals
+* **Targeted Job Evaluation:** Upload your PDF resume and input up to three job URLs. The app scrapes the job descriptions and uses AI to generate a "Fit Score" and custom verdict.
+* **Anti-Bot Bypass:** Features a dynamic toggle to paste raw job descriptions manually, bypassing heavy enterprise security (like Workday or LinkedIn) that block standard web scrapers.
+* **Resume DNA Dashboard:** Extracts technical and soft skills from your resume to automatically generate an interactive, data-rich radar chart using Chart.js.
+* **AI Resume Enhancer:** Acts as an executive recruiter, rewriting your past experience with strong action verbs and quantifiable metrics. Outputs directly to the UI with a one-click "Copy to Clipboard" function.
+* **Automated Tracking:** Seamlessly logs every job evaluation directly into a connected Google Sheet for effortless application tracking.
 
-## Getting Started
+## 🛠️ Tech Stack
 
-No build tools or dependencies are needed. Just open `index.html` in a browser:
+* **Frontend:** HTML5, CSS3 (Dark Japandi theme), Vanilla JavaScript, Chart.js
+* **Backend:** Node.js, Express.js, Multer (PDF handling), Puppeteer/Cheerio (Web scraping)
+* **AI Engine:** Google Generative AI (`gemini-3.1-flash-lite-preview`)
+* **Database:** Google Sheets API v4
+* **Hosting:** Render (Backend API) & GitHub Pages (Frontend UI)
 
-```bash
-# Option 1: Open the file directly
-open index.html
+## ⚙️ Local Setup & Installation
 
-# Option 2: Use a simple HTTP server
-python3 -m http.server 8000
-# Then visit http://localhost:8000
-```
+### Prerequisites
+* Node.js (v18 or higher)
+* A Google Gemini API Key
+* A Google Cloud Project with the Google Sheets API enabled (and a Service Account JSON key)
 
-## Project Structure
+### 1. Clone the repository
+\`\`\`bash
+git clone https://github.com/YOUR_USERNAME/Job-Matcher-API.git
+cd Job-Matcher-API
+\`\`\`
 
-```
-.
-├── index.html          # Main HTML page
-├── css/
-│   └── styles.css      # All styles
-├── js/
-│   └── app.js          # Application logic (vanilla JS, no dependencies)
-└── README.md
-```
+### 2. Install dependencies
+\`\`\`bash
+npm install
+\`\`\`
 
-## Data Storage
+### 3. Environment Variables
+Create a `.env` file in the root directory and add the following:
+\`\`\`env
+PORT=3000
+GEMINI_API_KEY=your_gemini_api_key_here
+\`\`\`
 
-Application data is stored in your browser's `localStorage` under the key `job_applications`. Data persists across page reloads but is specific to the browser and device you're using.
+### 4. Google Sheets Configuration
+1. Place your Service Account key file in the root directory and name it `credentials.json`.
+2. Open your target Google Sheet and share it (as an Editor) with the `client_email` found inside your `credentials.json` file.
+3. Update the `spreadsheetId` in `server.js` with your specific Google Sheet ID.
 
-To back up your data, use the **Export CSV** button to download a spreadsheet-compatible file.
+### 5. Start the Server
+\`\`\`bash
+npm start
+\`\`\`
+The backend will run on `http://localhost:3000`. 
 
-## Browser Support
+*(Note: If testing the frontend locally, ensure the `fetch` URLs in `app.js` point to your localhost instead of your live Render URL).*
 
-Works in all modern browsers (Chrome, Firefox, Safari, Edge).
+## 🎨 UI/UX Design
+The interface is designed with a "Zen Sci-Fi" philosophy—merging the clinical, futuristic elegance of *Westworld* with a warm, minimalist Japandi color palette. It features glassmorphism panels, pill-shaped interactive buttons, and responsive layout adjustments.
+
+## 📝 License
+This project is open-source and available under the MIT License.
