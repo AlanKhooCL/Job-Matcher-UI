@@ -1,3 +1,21 @@
+// --- 3D BOOK NAVIGATION LOGIC ---
+let currentPage = 1;
+const totalPages = 4;
+
+function turnPage(pageNumber) {
+    if (pageNumber >= totalPages) return;
+    const pageToFlip = document.getElementById(`page-${pageNumber}`);
+    pageToFlip.classList.add('flipped');
+    currentPage++;
+}
+
+function turnBack(pageNumber) {
+    if (pageNumber <= 0) return;
+    const pageToUnflip = document.getElementById(`page-${pageNumber}`);
+    pageToUnflip.classList.remove('flipped');
+    currentPage--;
+}
+
 document.getElementById('jobForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
