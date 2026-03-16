@@ -237,3 +237,100 @@ button:disabled {
   background-color: var(--surface-hover);
   color: var(--text-main);
 }
+/* --- 1. 3D BOOK ENVIRONMENT --- */
+.scene {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1800px; /* Gives the 3D depth effect */
+  background-color: #09120D; 
+}
+
+.book {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  height: 85vh; /* Standard book ratio */
+  transform-style: preserve-3d;
+}
+
+/* --- 2. THE PAGES --- */
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #121E16;
+  border: 1px solid #1E3125;
+  border-radius: 4px 16px 16px 4px; /* Curved right edge like a book */
+  transform-origin: left center; /* Binds the page to the left spine */
+  transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+  box-shadow: inset 8px 0 20px rgba(0,0,0,0.6), 5px 5px 15px rgba(0,0,0,0.3); /* Spine shadow */
+  overflow: hidden;
+}
+
+.page-content {
+  padding: 40px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.3s ease;
+}
+
+/* When the page turns, it rotates on the Y axis */
+.page.flipped {
+  transform: rotateY(-180deg);
+}
+
+/* Fades text out as it flips so it doesn't look backwards */
+.page.flipped .page-content {
+  opacity: 0; 
+}
+
+/* --- 3. INTERNAL PAGE LAYOUTS --- */
+.scrollable-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding-right: 10px;
+}
+
+.scrollable-content::-webkit-scrollbar { width: 6px; }
+.scrollable-content::-webkit-scrollbar-thumb { background: #1E3125; border-radius: 4px; }
+
+h1 { color: #10B981; font-size: 2.2rem; margin-bottom: 0; letter-spacing: 1px; }
+.subtitle { color: #8F9D94; font-size: 0.85rem; margin-bottom: 30px; border-bottom: 1px solid #1E3125; padding-bottom: 15px; }
+h2 { color: #E9EFEA; margin-bottom: 20px; border-bottom: 1px solid #1E3125; padding-bottom: 10px; }
+
+.action-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+.action-grid button[type="submit"] { grid-column: span 2; } /* Make evaluate button full width */
+
+/* Navigation Buttons fixed to bottom of pages */
+.page-nav {
+  margin-top: auto;
+  display: flex;
+  padding-top: 20px;
+  border-top: 1px solid #1E3125;
+}
+.page-nav.right { justify-content: flex-end; }
+.page-nav.left { justify-content: flex-start; }
+.page-nav.both { justify-content: space-between; }
+
+.nav-btn {
+  background: transparent;
+  color: #10B981;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 16px;
+  width: auto;
+}
+.nav-btn:hover { background: #1A2B20; border-radius: 20px; }
