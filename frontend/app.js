@@ -138,7 +138,7 @@ analyzeBtn.addEventListener('click', async () => {
     }
 });
 
-// Function to draw the Chart.js Radar Chart (Japandi Dark Mode)
+// Function to draw the Chart.js Radar Chart (Corporate Emerald Theme)
 function drawChart(skillScores) {
     const ctx = document.getElementById('skillsRadarChart').getContext('2d');
     
@@ -150,11 +150,12 @@ function drawChart(skillScores) {
     const labels = Object.keys(skillScores);
     const values = Object.values(skillScores);
 
-    // Our new Japandi / Westworld color palette
-    const sageGreen = 'rgba(122, 139, 125, 1)';
-    const sageGreenTranslucent = 'rgba(122, 139, 125, 0.25)';
-    const mutedTaupe = '#95938B';
-    const gridColor = 'rgba(149, 147, 139, 0.15)'; // Very faint taupe for the web lines
+    // Our new Emerald Green Corporate Palette
+    const emeraldGreen = 'rgba(16, 185, 129, 1)'; // var(--accent)
+    const emeraldTranslucent = 'rgba(16, 185, 129, 0.25)';
+    const mutedText = '#8F9D94'; // var(--text-muted)
+    const gridLines = 'rgba(30, 49, 37, 0.8)'; // var(--border-subtle)
+    const backgroundDark = '#121E16'; // var(--surface)
 
     radarChart = new Chart(ctx, {
         type: 'radar',
@@ -163,12 +164,12 @@ function drawChart(skillScores) {
             datasets: [{
                 label: 'Skill Proficiency',
                 data: values,
-                backgroundColor: sageGreenTranslucent,
-                borderColor: sageGreen,
-                pointBackgroundColor: sageGreen,
-                pointBorderColor: '#161615', // Matches the dark background
-                pointHoverBackgroundColor: '#EAE6D7', // Linen highlight on hover
-                pointHoverBorderColor: sageGreen,
+                backgroundColor: emeraldTranslucent,
+                borderColor: emeraldGreen,
+                pointBackgroundColor: emeraldGreen,
+                pointBorderColor: backgroundDark,
+                pointHoverBackgroundColor: '#E9EFEA', // Crisp off-white hover
+                pointHoverBorderColor: emeraldGreen,
                 borderWidth: 2,
                 pointRadius: 4,
                 pointHoverRadius: 6
@@ -177,28 +178,29 @@ function drawChart(skillScores) {
         options: {
             plugins: {
                 legend: {
-                    display: false // Hides the top label for a cleaner, minimalist look
+                    display: false 
                 }
             },
             scales: {
                 r: {
                     angleLines: { 
                         display: true,
-                        color: gridColor 
+                        color: gridLines 
                     },
                     grid: {
-                        color: gridColor
+                        color: gridLines
                     },
                     pointLabels: {
-                        color: mutedTaupe, // The text color for the skill names around the chart
+                        color: mutedText,
                         font: {
-                            family: "'Space Grotesk', sans-serif",
-                            size: 11,
-                            letterSpacing: 1
+                            // Matching the new LinkedIn-style system font stack
+                            family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+                            size: 12,
+                            weight: '600'
                         }
                     },
                     ticks: {
-                        display: false, // Hides the 0-10 numbers inside the chart for a cleaner look
+                        display: false, 
                         suggestedMin: 0,
                         suggestedMax: 10
                     }
@@ -207,7 +209,6 @@ function drawChart(skillScores) {
         }
     });
 }
-
 // --- ENHANCER LOGIC ---
 const enhanceBtn = document.getElementById('enhance-btn');
 const enhancedContainer = document.getElementById('enhanced-container');
